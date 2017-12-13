@@ -1,0 +1,7 @@
+<svg width="64" height="64" xmlns="http://www.w3.org/2000/svg">
+
+<polygon fill="black" stroke="none" points="0,0 64,0 64,64 0,64"/>
+
+<polygon fill="white" stroke="none" points="2,2 47,2 47,17 17,17 17,32 47,32 47,47 17,47 17,62 2,62" />
+
+</svg>
