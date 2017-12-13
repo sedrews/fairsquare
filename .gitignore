@@ -1,1 +1,6 @@
+# Python bytecode
 *.pyc
+
+# Redlog qelim
+qelim.res
+temp.red
