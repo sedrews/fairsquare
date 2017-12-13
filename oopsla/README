@@ -1,0 +1,19 @@
+run.sh automates running batches of benchmarks.  Usage:
+
+./run.sh <benchmark-list> <results-directory> [<timeout>]
+
+<benchmark-list> is a file where each line is a relative path, from this
+    directory, to an .fr to be run
+<results-directory> is the name of a non-existing directory where the output
+    files will be stored
+<timeout> is an optional argument that specifies a number of seconds after
+    which to kill each individual benchmark (60 to 1800 recommended)
+
+There are three existing benchmark lists in .txt files:
+  fast.txt contains the benchmarks from the paper that terminate quickly (within
+           approximately one minute); all use vacuously true qualification
+ fastQ.txt contains the non-trivial qualification benchmarks (not included in
+           the paper) that terminate quickly
+   all.txt contains all of the files from the qual/ and noqual/ directories
+           (this will take a LONG time to run, in general; be sure to use
+           a timeout)
