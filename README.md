@@ -17,6 +17,15 @@ and the python packages `codegen` and `asteval`
 (easily obtained using [pip](http://pypi.python.org/pypi/pip):
 `pip install --user codegen asteval`)
 
+By default, FairSqaure uses
+[redlog](http://www.redlog.eu/get-redlog/)
+for quantifier elimination, which must be downloaded separately:
+FairSquare expects the downloaded files to be placed in `src/tools/`
+(specifically, it runs `src/tools/reduce`,
+which relies on the existence of `src/tools/reduce.img`).
+Alternatively, FairSquare can use a DNF-based quantifier elimination
+implemented with z3 by using the `-z` flag when running the tool.
+
 ## Running the tool
 
 Once the dependencies are installed, navigate to the `src` directory.
@@ -24,6 +33,9 @@ Basic usage of the tool involves a command like
 
 ```python fairProve.py -f ex.fr -mi -mf```
 
+`-f ex.fr` specifies that `ex.fr` contains the fairness verification problem to be analyzed
+(in fact, `src/ex.fr` contains the illustrative example from the OOPSLA paper),
+and `-mi -mf` are optimizations that should always be used.
 A full list of command-line flags is available from
 `python fairProve.py -h`.
 

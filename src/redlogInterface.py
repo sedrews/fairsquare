@@ -166,10 +166,7 @@ def qelimRedlog(vars, phi, exists=False):
     resfile = open("qelim.res", "w+")
     resfile.close()
 
-    redlogBinary = './tools/reduce'
-    if platform.system() == 'Linux':
-        redlogBinary = './tools/reduce_linux'
-    p = Popen([redlogBinary, "temp.red"], stdout=PIPE)
+    p = Popen(['./tools/reduce', "temp.red"], stdout=PIPE)
     p.wait()
 
     # open and read results file
