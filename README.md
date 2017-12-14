@@ -47,3 +47,11 @@ The benchmarks are divided, based on their fairness postconditions,
 into `oopsla/qual` and `oopsla/noqual`.
 The `oopsla/run.sh` script can be used to run batches of benchmarks;
 see `oopsla/README` for more information.
+
+## Contributors
+
+* [Samuel Drews](http://pages.cs.wisc.edu/~sdrews/) (primary contact)
+* [David Merrell](https://dpmerrell.github.io/about/)
+* [Aws Albarghouthi](http://pages.cs.wisc.edu/~aws/)
+* [Loris D'Antoni](http://pages.cs.wisc.edu/~loris/)
+* [Aditya Nori](https://www.microsoft.com/en-us/research/people/adityan/)
