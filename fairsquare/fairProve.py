@@ -1,4 +1,4 @@
-from parse import Encoder
+from parse import parse_fr
 import argparse
 import ast
 from vol import VComp
@@ -265,11 +265,7 @@ def main():
         simulate(args.file, args.simulate, args.simTimes)
         return
 
-    f = open(args.file, "r")
-    node = ast.parse(f.read())
-
-    e = Encoder()
-    e.visit(node)
+    e = parse_fr(args.file)
 
     print("\n\n== Population and program encoding == ")
     print("Population model: ", e.model)
@@ -278,8 +274,8 @@ def main():
     print("Probability dists: ", e.vdist)
     print("fairness target", e.fairnessTarget)
     print("sensitiveAttribute", e.sensitiveAttribute)
+    print("qualified", e.qualified)
     print("\n\n")
-
 
     #print("ROTATE COMMAND LINE ARGUMENT:\n", args.rotate)
 

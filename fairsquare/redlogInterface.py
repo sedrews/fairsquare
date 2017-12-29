@@ -2,7 +2,6 @@ from z3 import *
 from z3extra import *
 from subprocess import Popen, PIPE
 import ast
-from parse import Encoder
 import platform
 from itertools import tee, zip_longest
 from functools import reduce

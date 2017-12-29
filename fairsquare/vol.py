@@ -87,18 +87,18 @@ class VComp:
         
         # Do we rotate? Is the rotation something
         # other than the identity?
-        self.rotate = rotate
-        self.not_identity = False
-        if self.rotate == 'forced':
-            self.rel_gvars = self.getGaussians()
-            self.rmat = np.identity(len(self.rel_gvars))
+        #self.rotate = rotate
+        #self.not_identity = False
+        #if self.rotate == 'forced':
+        #    self.rel_gvars = self.getGaussians()
+        #    self.rmat = np.identity(len(self.rel_gvars))
 
         # Set a digit limit on the rational
         # vectors.
-        if rot_digits is None:
-            self.rot_digits = min(max(8 - len(self.getGaussians()), 3), 5)
-        else:
-            self.rot_digits = rot_digits
+        #if rot_digits is None:
+        #    self.rot_digits = min(max(8 - len(self.getGaussians()), 3), 5)
+        #else:
+        #    self.rot_digits = rot_digits
 
         #keep track of the number of samples used for volume computation so far
         self.numSamples = 0
@@ -657,19 +657,19 @@ class VComp:
         lbs = self.getLbs()
 
         # rotate the formula
-        mat, gv = self.getRotation(self.rotate)
+        #mat, gv = self.getRotation(self.rotate)
         #print("ROTATION MATRIX:\n", mat)
         #raw_input("press enter")
-        self.phi = self.rotateFormula(mat, gv)
+        #self.phi = self.rotateFormula(mat, gv)
 
         #print "MADE A ROTATION MATRIX..."
         #wait()
         # Determine whether the rotation was anything
         # other than the identity.
-        if np.array_equal(np.abs(1.0*mat),np.identity(mat.shape[0])):
-            self.not_identity = False
-        else:
-            self.not_identity = True
+        #if np.array_equal(np.abs(1.0*mat),np.identity(mat.shape[0])):
+        #    self.not_identity = False
+        #else:
+        #    self.not_identity = True
 
         consts = []
         for v in self.phiVars:
