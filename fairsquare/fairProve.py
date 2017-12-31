@@ -131,64 +131,35 @@ def proveFairness(p, output, epsilon, finmax, randomize, infmax, plot, z3qe, num
 
     probs = [ProbComp(name, phi, *vcargs) for name, phi in zip(phinames,phis)]
 
-    def gratiol(PrM, PrMH, PrnotMH):
-        #underapproximate the numerator, P(H|M) = P(HM) / P(M)
-        phgm = PrMH.under() / PrM.over()
-        #overapproximate the denominator, P(H|!M) = P(H!M) / P(!M)
-        phgnm = PrnotMH.over() / (1 - PrM.over())
-        return phgm / phgnm
-    def gratiou(PrM, PrMH, PrnotMH): 
-        #overapproximate the numerator
-        phgm = PrMH.over() / PrM.under()
-        #underapproximate the denominator
-        phgnm = PrnotMH.under() / (1 - PrM.under())
-        return phgm / phgnm
     def gpost(PrM, PrMH, PrnotMH, epsilon):
-        try: l = gratiol(PrM, PrMH, PrnotMH)
-        except ZeroDivisionError: l = None
-        try: u = gratiou(PrM, PrMH, PrnotMH)
-        except ZeroDivisionError: l = None
-        print("ratio bounds:", float(l) if l is not None else "None", float(u) if u is not None else "None")
-        if u is not None and u < 1 - epsilon:
-            return False
-        elif l is not None and l > 1 - epsilon:
-            return True
-        else:
-            return None
-
-    def gqratiol(PrMQ, PrnotMQ, PrMQH, PrnotMQH):
-        #underapproximate the numerator, P(H|MQ) = P(HMQ) / P(MQ)
-        phgmq = PrMQH.under() / PrMQ.over()
-        #overapproximate the denominator, P(H|!MQ) = P(H!MQ) / P(!MQ)
-        phgnmq = PrnotMQH.over() / PrnotMQ.under()
-        return phgmq / phgnmq
-    def gqratiou(PrMQ, PrnotMQ, PrMQH, PrnotMQH):
-        #overapproximate the numerator
-        phgmq = PrMQH.over() / PrMQ.under()
-        #underapproximate the denominator
-        phgnmq = PrnotMQH.under() / PrnotMQ.over()
-        return phgmq / phgnmq
+        ratio = None
+        res = None
+        try:
+            PrHgM = PrMH / PrM
+            PrHgnotM = PrnotMH / (1 - PrM)
+            ratio = PrHgM / PrHgnotM
+            print("ratio bounds:", str(float(ratio.lower)) + " " + str(float(ratio.upper)) if ratio is not None else "None None")
+            res = bool(ratio > epsilon) # Will raise ValueError if unknown
+        except (ZeroDivisionError, ValueError):
+            pass
+        return res
     def gqpost(PrMQ, PrnotMQ, PrMQH, PrnotMQH, epsilon):
-        try: l = gqratiol(PrMQ, PrnotMQ, PrMQH, PrnotMQH)
-        except ZeroDivisionError: l = None
-        try: u = gqratiou(PrMQ, PrnotMQ, PrMQH, PrnotMQH)
-        except ZeroDivisionError: u = None
-        print("ratio bounds:", float(l), float(u))
-        if u is not None and u < 1 - epsilon:
-            return False
-        elif l is not None and l > 1 - epsilon:
-            return True
-        else:
-            return None
+        ratio = None
+        res = None
+        try:
+            PrHgMQ = PrMQH / PrMQ
+            PrHgnotMQ = PrnotMQH / PrnotMQ
+            ratio = PrHgMQ / PrHgnotMQ
+            print("ratio bounds:", str(float(ratio.lower)) + " " + str(float(ratio.upper)) if ratio is not None else "None None")
+            res = bool(ratio > epsilon)
+        except (ZeroDivisionError, ValueError):
+            pass
+        return res
 
     if noqual:
-        ratiol = lambda : gratiol(*probs)
-        ratiou = lambda : gratiou(*probs)
-        post = lambda : gpost(*probs, epsilon)
+        post = lambda : gpost(*[p.value for p in probs], epsilon)
     else:
-        ratiol = lambda : gqratiol(*probs)
-        ratiou = lambda : gqratiou(*probs)
-        post = lambda : gqpost(*probs, epsilon)
+        post = lambda : gqpost(*[p.value for p in probs], epsilon)
 
     proof = False
 

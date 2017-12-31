@@ -74,10 +74,20 @@ class Interval(object):
     @property
     def pairs(self):
         return self._pairs
-    # mutating the pairs should call _normalize
+    # Mutating the pairs should call _normalize
     @pairs.setter
     def pairs(self, val):
+        if not (isinstance(val, list) and len(val) > 0):
+            raise ValueError
         self._pairs = Interval._normalize(val.copy())
+
+    # Properties for lower/upper bounds
+    @property
+    def upper(self):
+        return self._pairs[-1][1]
+    @property
+    def lower(self):
+        return self._pairs[0][0]
 
     # Collapse a list of intervals into a minimal normal form
     # Note: mutates the input (and returns it too)

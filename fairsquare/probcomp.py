@@ -2,8 +2,9 @@ from z3 import *
 from z3extra import *
 from vol import VComp
 from fractions import Fraction
+from abstract import Interval
 
-class ProbComp:
+class ProbComp(object):
     def __init__(self, name, phi, vdist, finmax, randomize, infmax, z3qe, adapt, rotate, numHists = 5, histBound = 3, verbose=False,rot_digits=None):
 
         self.name = name
@@ -44,11 +45,9 @@ class ProbComp:
     def numSamples(self):
         return self._lvol.numSamples + self._uvol.numSamples
 
-    def under(self):
-        return self._l
-
-    def over(self):
-        return 1 - self._u
+    @property
+    def value(self):
+        return Interval((self._l,self._u))
 
     def __str__(self):
         return str(self.name) + " : [" + str(float(self.under())) + ", " + str(float(self.over())) + "]"
