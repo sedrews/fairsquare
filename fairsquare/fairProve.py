@@ -139,7 +139,7 @@ def proveFairness(p, output, epsilon, finmax, randomize, infmax, plot, z3qe, num
             PrHgnotM = PrnotMH / (1 - PrM)
             ratio = PrHgM / PrHgnotM
             print("ratio bounds:", str(float(ratio.lower)) + " " + str(float(ratio.upper)) if ratio is not None else "None None")
-            res = bool(ratio > epsilon) # Will raise ValueError if unknown
+            res = bool(ratio > 1-epsilon) # Will raise ValueError if unknown
         except (ZeroDivisionError, ValueError):
             pass
         return res
@@ -151,7 +151,7 @@ def proveFairness(p, output, epsilon, finmax, randomize, infmax, plot, z3qe, num
             PrHgnotMQ = PrnotMQH / PrnotMQ
             ratio = PrHgMQ / PrHgnotMQ
             print("ratio bounds:", str(float(ratio.lower)) + " " + str(float(ratio.upper)) if ratio is not None else "None None")
-            res = bool(ratio > epsilon)
+            res = bool(ratio > 1-epsilon)
         except (ZeroDivisionError, ValueError):
             pass
         return res

@@ -47,7 +47,7 @@ class ProbComp(object):
 
     @property
     def value(self):
-        return Interval((self._l,self._u))
+        return Interval((self._l, 1-self._u))
 
     def __str__(self):
         return str(self.name) + " : [" + str(float(self.under())) + ", " + str(float(self.over())) + "]"
