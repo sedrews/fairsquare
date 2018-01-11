@@ -1,5 +1,5 @@
 from z3 import *
-from z3extra import *
+from .z3extra import *
 from subprocess import Popen, PIPE
 import ast
 import platform

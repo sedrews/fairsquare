@@ -18,7 +18,7 @@
 
 from z3 import *
 import numpy as np
-import z3extra as ze
+from . import z3extra as ze
 
 class numericalPhi:
 

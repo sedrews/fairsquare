@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from scipy.stats import norm
 from z3 import *
-from z3extra import *
+from .z3extra import *
 
 class ProbVar(ABC):
     @abstractmethod

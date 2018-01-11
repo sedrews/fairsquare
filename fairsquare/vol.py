@@ -1,16 +1,16 @@
 from z3 import *
-from z3extra import *
+from .z3extra import *
 from scipy.stats import norm
 import numpy as np
 import copy
 import subprocess
 from collections import deque
-from redlogInterface import *
-import rotationmath as rm
-from numericalPhi import numericalPhi
+from .redlogInterface import *
+from . import rotationmath as rm
+from .numericalPhi import numericalPhi
 import time
 from functools import reduce
-from probvar import GaussVar, StepVar
+from .probvar import GaussVar, StepVar
 
 def wait():
     input("Press something...")

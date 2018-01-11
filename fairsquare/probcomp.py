@@ -1,11 +1,13 @@
 from z3 import *
-from z3extra import *
-from vol import VComp
+from .z3extra import *
+from .vol import VComp
 from fractions import Fraction
-from abstract import Interval
+from .abstract import Interval
+
 
 class ProbComp(object):
-    def __init__(self, name, phi, vdist, finmax, randomize, infmax, z3qe, adapt, rotate, numHists = 5, histBound = 3, verbose=False,rot_digits=None):
+
+    def __init__(self, name, phi, vdist, finmax, randomize, infmax, z3qe, adapt, rotate, numHists = 5, histBound = 3, verbose=False, rot_digits=None):
 
         self.name = name
 
