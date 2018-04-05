@@ -5,7 +5,7 @@ import random
 
 
 def gaussian(m, v):
-    return np.normal(m, v)
+    return np.normal(m, v ** 0.5)
 
 def uniform(l, u):
     assert( u > l )
